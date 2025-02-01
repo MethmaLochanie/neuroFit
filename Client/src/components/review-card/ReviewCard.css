@@ -1,0 +1,49 @@
+.testimonial-card {
+  width: 400px;
+  padding: 16px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+  transition: box-shadow 0.3s ease;
+}
+
+.testimonial-card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.profile-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.card-details {
+  flex: 1;
+}
+
+.card-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 0 4px 0;
+}
+
+.rating-stars {
+  font-size: 16px;
+  color: #ffc107; /* Gold color for stars */
+}
+
+.card-review {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+  margin: 0;
+}

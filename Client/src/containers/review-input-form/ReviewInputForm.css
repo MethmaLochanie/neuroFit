@@ -1,0 +1,46 @@
+.review-input-form {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 16px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.user-avatar {
+  margin-right: 12px;
+}
+
+.user-name {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+.review-textarea {
+  margin-bottom: 16px;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  resize: none;
+}
+
+.form-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.custom-button {
+  border-radius: 8px;
+  font-weight: bold;
+}

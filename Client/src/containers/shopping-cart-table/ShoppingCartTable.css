@@ -1,0 +1,53 @@
+.ant-table-thead > tr > th {
+  color: #fff; /* White text for header */
+  text-align: center;
+  font-weight: bold;
+}
+
+.ant-table-tbody > tr > td {
+  text-align: center; /* Center-align table content */
+}
+
+.product-details {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.product-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.product-name {
+  font-weight: bold;
+  margin: 0;
+  text-align: left; /* Left-align the product name */
+}
+
+.product-attributes {
+  color: #666;
+  margin: 0;
+  font-size: 12px;
+  text-align: left; /* Left-align product attributes */
+}
+
+.price {
+  font-weight: bold;
+  color: #8f1362; /* Updated price color */
+}
+
+.quantity-input {
+  width: 60px;
+}
+
+.free-shipping {
+  color: #888;
+  font-weight: bold;
+}
+
+.delete-button {
+  color: #f5222d;
+}

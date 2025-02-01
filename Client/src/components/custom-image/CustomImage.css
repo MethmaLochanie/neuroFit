@@ -1,0 +1,12 @@
+.custom-image {
+  object-fit: cover; /* Ensures the image fits nicely */
+  display: block;
+  border-radius: 8px; /* Default rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Default shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.custom-image:hover {
+  transform: scale(1.05); /* Slight zoom on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* More pronounced shadow on hover */
+}

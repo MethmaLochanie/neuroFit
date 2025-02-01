@@ -1,0 +1,19 @@
+.star-rating .ant-rate-star {
+  font-size: 24px; /* Adjust size of the stars */
+}
+
+.star-rating .ant-rate-star-full {
+  color: #ffc107; /* Gold color for full stars */
+}
+
+.star-rating .ant-rate-star-half .ant-rate-star-first {
+  color: #ffc107; /* Gold color for half stars */
+}
+
+.star-rating .ant-rate-star-half .ant-rate-star-second {
+  color: #e0e0e0; /* Light gray for the empty part */
+}
+
+.star-rating .ant-rate-star-zero {
+  color: #e0e0e0; /* Light gray for empty stars */
+}

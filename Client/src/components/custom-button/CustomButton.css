@@ -1,0 +1,51 @@
+.custom-button {
+  border-radius: 5px;
+  font-weight: bold;
+  text-transform: capitalize;
+  padding: 8px 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px; /* Space between icon and text */
+  transition: all 0.3s ease;
+}
+
+.custom-button .button-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.custom-button:hover {
+  transform: scale(1.05); /* Slight hover effect */
+  opacity: 0.9;
+}
+
+.custom-button:active {
+  transform: scale(0.98); /* Slight click effect */
+}
+
+.custom-button.add-to-cart {
+  background-color: #ff00ff;
+  border: none;
+  color: white;
+}
+
+.custom-button.buy-now {
+  background-color: #ffc0cb;
+  border: none;
+  color: #333;
+}
+
+/* Circular Button Styles */
+.circular-button {
+  background-color: #fff; /* Default background */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 2px solid #f0f0f0;
+}
+
+.circular-button:hover {
+  background-color: #f8f8f8;
+  border-color: #ddd;
+}

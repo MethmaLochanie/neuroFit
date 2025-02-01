@@ -1,0 +1,65 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-logo {
+  font-size: 24px;
+  font-weight: bold;
+  margin-right: 20px;
+}
+
+.navbar-links {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-links li {
+  margin-right: 15px;
+  font-size: 16px;
+  color: #555;
+  cursor: pointer;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-search {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.navbar-search .ant-input-search {
+  width: 500px;
+  margin-right: 15px;
+}
+
+.navbar-icons {
+  display: flex; /* Ensures icons are in a row */
+  align-items: center; /* Vertically centers the icons */
+  gap: 10px; /* Adds space between the icons */
+}
+
+.navbar-icons .ant-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar-icons .ant-btn > .anticon {
+  font-size: 18px;
+}
