@@ -1,22 +1,18 @@
-const {
-    PAYMENT_METHODS,
-} = require("../constants/paymentMethods.js");
-const {
-    ORDER_STATUS,
-} = require("../constants/orderStatus.js");
+const { PAYMENT_METHODS } = require("../constants/paymentMethods.js");
+const { ORDER_STATUS } = require("../constants/orderStatus.js");
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const addToCartSchema = new Schema({
+const orderSchema = new Schema({
   userId: {
     type: String,
     required: true,
   },
-  orderId: {
-    type: String,
-    required: true,
-    unique: true,
-  },
+  // orderId: {
+  //   type: String,
+  //   required: true,
+  //   unique: true,
+  // },
   fName: {
     type: String,
     required: true,
@@ -45,7 +41,7 @@ const addToCartSchema = new Schema({
     type: String,
     required: true,
   },
-  articles: [
+  orders: [
     {
       articleId: {
         type: String,
@@ -64,7 +60,7 @@ const addToCartSchema = new Schema({
   ],
   subtotal: {
     type: Number,
-    required: true
+    required: true,
   },
   paymentMethod: {
     type: String,
@@ -76,6 +72,10 @@ const addToCartSchema = new Schema({
     enum: ORDER_STATUS,
     default: ORDER_STATUS.PENDING,
   },
+  date: {
+    type: Date,
+    required: true,
+  },
 });
 
-module.exports = mongoose.model("addToCart", addToCartSchema);
+module.exports = mongoose.model("Order", orderSchema);

@@ -1,13 +1,13 @@
 import React from "react";
 import { Input, Avatar, Dropdown, Menu, Button, Space, MenuProps } from "antd";
-import "./ReviewInputForm.css";
+import "./FeedbackInputForm.css";
 import CustomButton from "../../components/custom-button/CustomButton";
 import Upload from "antd/es/upload/Upload";
 import { DownOutlined, PictureOutlined } from "@ant-design/icons";
 
 const { TextArea } = Input;
 
-const ReviewInputForm: React.FC = () => {
+const FeedbackInputForm: React.FC = () => {
   const handleMenuClick: MenuProps["onClick"] = (e) => {
     // message.info('Click on menu item.');
     console.log("click", e);
@@ -87,4 +87,4 @@ const ReviewInputForm: React.FC = () => {
   );
 };
 
-export default ReviewInputForm;
+export default FeedbackInputForm;

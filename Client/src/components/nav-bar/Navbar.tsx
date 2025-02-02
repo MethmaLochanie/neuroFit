@@ -6,7 +6,7 @@ import {
   ShoppingCartOutlined,
 } from "@ant-design/icons";
 import "./Navbar.css";
-import ReusableSearchBar from "../ReusableSearchBar/ReusableSearchBar";
+import ReusableSearchBar from "../reusable-search-bar/ReusableSearchBar";
 
 export const Navbar: React.FC = () => {
 

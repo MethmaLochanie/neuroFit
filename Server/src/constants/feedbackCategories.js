@@ -1,0 +1,3 @@
+module.exports = {
+  FEEDBACK_CATEGORY: ["FEEDBACK", "BUG_REPORT", "FEATURE_REQUEST"],
+};

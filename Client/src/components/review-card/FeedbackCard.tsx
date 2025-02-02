@@ -1,19 +1,19 @@
 import React from "react";
 import { Rate } from "antd";
-import "./ReviewCard.css";
+import "./FeedbackCard.css";
 import StarRating from "../star-rating/StarRating";
 
-interface ReviewCardProps {
+interface FeedbackCardProps {
   imageUrl: string; // URL for the user's profile picture
   name: string; // Name of the user
-  review: string; // Review text
+  feedback: string; // Review text
   rating: number; // Rating value
 }
 
-const ReviewCard: React.FC<ReviewCardProps> = ({
+const FeedbackCard: React.FC<FeedbackCardProps> = ({
   imageUrl,
   name,
-  review,
+  feedback,
   rating,
 }) => {
   return (
@@ -25,9 +25,9 @@ const ReviewCard: React.FC<ReviewCardProps> = ({
         </div>
       </div>
       <h3 className="card-name">{name}</h3>
-      <p className="card-review">{review}</p>
+      <p className="card-review">{feedback}</p>
     </div>
   );
 };
 
-export default ReviewCard;
+export default FeedbackCard;
