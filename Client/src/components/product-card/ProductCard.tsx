@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   ArrowRightOutlined,
   HeartOutlined,
@@ -8,6 +8,8 @@ import "./ProductCard.css";
 import CustomButton from "../custom-button/CustomButton";
 import StarRating from "../star-rating/StarRating";
 import CustomImage from "../custom-image/CustomImage";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
 interface ProductCardProps {
   imageUrl: string; // URL for the product image
@@ -26,33 +28,43 @@ const ProductCard: React.FC<ProductCardProps> = ({
   onAddToCart,
   onWishlist,
 }) => {
+  const auth = useContext(AuthContext);
+
+  // Check if user is logged in
+  const isLoggedIn = auth?.user !== null;
+  const navigate = useNavigate();
+  const handleArrowClick = () => {
+    navigate("/product-details");
+  };
   return (
     <div className="product-card">
       <div className="product-image">
         <CustomImage
-          src="Blue_Cute_Dog.png"
+          src={imageUrl}
           alt="Cute Dog"
           //   width="200px"
           //   height="200px"
         />
-        <div className="product-actions">
-          <CustomButton
-            icon={<HeartOutlined />}
-            circular
-            customStyle={{ backgroundColor: "#fff", color: "#333" }}
-          />
-          <CustomButton
-            icon={<ShoppingCartOutlined />}
-            circular
-            customStyle={{ backgroundColor: "#fff", color: "#b22222" }}
-          />
-        </div>
+        {isLoggedIn && (
+          <div className="product-actions">
+            <CustomButton
+              icon={<HeartOutlined />}
+              circular
+              customStyle={{ backgroundColor: "#fff", color: "#333" }}
+            />
+            <CustomButton
+              icon={<ShoppingCartOutlined />}
+              circular
+              customStyle={{ backgroundColor: "#fff", color: "#b22222" }}
+            />
+          </div>
+        )}
       </div>
       <div className="product-info">
         <div className="product-title">
           <h3>{title}</h3>
           <div className="product-arrow">
-            <ArrowRightOutlined />
+            <ArrowRightOutlined onClick={handleArrowClick} />
           </div>
         </div>
         <div className="product-details">

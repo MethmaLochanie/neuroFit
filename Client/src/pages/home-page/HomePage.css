@@ -1,0 +1,70 @@
+.homepage {
+  text-align: center;
+  background-color: #f5f5f5;
+  padding-bottom: 40px;
+  margin-top: 50px;
+}
+
+.banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 60px 10%;
+  background-color: #efc7e3;
+  color: #000;
+  border-radius: 10px;
+}
+
+.banner-text {
+  flex: 1;
+  text-align: left;
+}
+
+.title {
+  font-size: 48px;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 15px;
+}
+
+.banner-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.banner-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.shop-now-btn {
+  background-color: #ff91b6;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.shop-now-btn:hover {
+  background-color: #ff6a96;
+}
+
+.section {
+  padding: 40px 40px ;
+  text-align: center;
+}
+
+.section-title {
+  margin-bottom: 30px;
+  padding-left: 10px;
+}
+
+.custom-card-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}

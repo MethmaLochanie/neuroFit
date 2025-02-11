@@ -1,0 +1,46 @@
+/* Profile Card Container */
+.profile-card {
+    padding: 20px;
+    background: #fff;
+    text-align: center;
+    font-family: "Arial", sans-serif;
+  }
+  
+  /* Welcome Text */
+  .welcome-text {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  /* Profile Details */
+  .profile-details {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+  }
+  
+  /* Profile Picture */
+  .profile-picture {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  /* Profile Name */
+  .profile-name {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  /* Profile Email */
+  .profile-email {
+    font-size: 14px;
+    color: #777;
+  }
+  

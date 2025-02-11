@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const { FEEDBACK_CATEGORY } = require("../constants/feedbackCategories");
 
 const feedbackSchema = new Schema({
   userId: {

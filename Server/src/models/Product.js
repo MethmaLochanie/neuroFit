@@ -22,6 +22,30 @@ const productSchema = new Schema({
     type: String,
     required: true,
   },
+  prodCategory: {
+    type: String,
+    required: true,
+  },
+  prodColors: [
+    {
+      type: String,
+      required: true,
+    },
+  ],
+  prodSizes: [
+    {
+      type: String,
+      required: true,
+    },
+  ],
+  prodStyle: {
+    type: String,
+    required: true,
+  },
+  inStock: {
+    type: Number,
+    required: true,
+  },
   media: [
     {
       type: String,

@@ -1,0 +1,34 @@
+/* Category List Container */
+.category-list {
+    width: 250px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    font-family: "Arial", sans-serif;
+  }
+  
+  /* Individual Category Item */
+  .category-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 5px;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+    transition: background 0.2s ease-in-out;
+  }
+  
+  /* Hover Effect */
+  .category-item:hover {
+    background: #f3f3f3;
+    border-radius: 5px;
+  }
+  
+  /* Right Arrow Icon */
+  .arrow-icon {
+    color: #777;
+    font-size: 14px;
+  }
+  

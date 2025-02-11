@@ -9,7 +9,7 @@ const authRoutes = require("./routes/authRoutes");
 const cartRoutes = require("./routes/cartRoutes");
 const feedbackRoutes = require("./routes/feedbackRoutes");
 const orderRoutes = require("./routes/orderRoutes");
-const productsRoutes = require("./routes/productRoutes");
+const productsRoutes = require("./routes/productsRoutes");
 
 const app = express();
 const PORT = process.env.PORT || 5000;

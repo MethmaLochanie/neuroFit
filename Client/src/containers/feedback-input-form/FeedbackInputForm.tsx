@@ -4,6 +4,7 @@ import "./FeedbackInputForm.css";
 import CustomButton from "../../components/custom-button/CustomButton";
 import Upload from "antd/es/upload/Upload";
 import { DownOutlined, PictureOutlined } from "@ant-design/icons";
+import StarRating from "../../components/star-rating/StarRating";
 
 const { TextArea } = Input;
 
@@ -72,6 +73,7 @@ const FeedbackInputForm: React.FC = () => {
             {/* </Space> */}
           </Button>
         </Dropdown>
+        <StarRating rating={0} />
         <CustomButton
           type="primary"
           customStyle={{

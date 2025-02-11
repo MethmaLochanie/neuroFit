@@ -63,3 +63,7 @@
 .navbar-icons .ant-btn > .anticon {
   font-size: 18px;
 }
+
+.navbar-btn{
+  margin-left: 20px;
+}

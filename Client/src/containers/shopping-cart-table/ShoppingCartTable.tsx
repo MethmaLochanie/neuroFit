@@ -17,7 +17,7 @@ interface CartItem {
 const initialData: CartItem[] = [
   {
     key: "1",
-    image: "https://via.placeholder.com/50",
+    image: "Blue_Cute_Dog.png",
     name: "Blue Flower Print Crop Top",
     color: "Yellow",
     size: "M",
@@ -27,7 +27,7 @@ const initialData: CartItem[] = [
   },
   {
     key: "2",
-    image: "https://via.placeholder.com/50",
+    image: "Neutral_Minimalism.png",
     name: "Lavender Hoodie",
     color: "Lavender",
     size: "XXL",
@@ -37,7 +37,7 @@ const initialData: CartItem[] = [
   },
   {
     key: "3",
-    image: "https://via.placeholder.com/50",
+    image: "Grey_Black.png",
     name: "Black Sweatshirt",
     color: "Black",
     size: "XXL",
@@ -68,12 +68,12 @@ const ShoppingCartTable: React.FC = () => {
       dataIndex: "image",
       key: "image",
       render: (text: string, record: CartItem) => (
-        <div className="product-details">
-          <img src={record.image} alt={record.name} className="product-image" />
+        <div className="cart-table-product-details">
+          <img src={record.image} alt={record.name} className="cart-table-product-image" />
           <div>
-            <p className="product-name">{record.name}</p>
-            <p className="product-attributes">Color: {record.color}</p>
-            <p className="product-attributes">Size: {record.size}</p>
+            <p className="cart-table-product-name">{record.name}</p>
+            <p className="cart-table-product-attributes">Color: {record.color}</p>
+            <p className="cart-table-product-attributes">Size: {record.size}</p>
           </div>
         </div>
       ),

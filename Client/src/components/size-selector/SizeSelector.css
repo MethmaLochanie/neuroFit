@@ -1,0 +1,25 @@
+/* Size Selector */
+.size-selector p,
+.color-selector p {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.size-options {
+  display: flex;
+  gap: 10px;
+}
+
+.size-btn {
+  border: 1px solid #ccc;
+  padding: 8px 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.size-btn:hover,
+.size-btn.selected {
+  background-color: #ff91b6;
+  color: white;
+}

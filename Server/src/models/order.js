@@ -8,11 +8,6 @@ const orderSchema = new Schema({
     type: String,
     required: true,
   },
-  // orderId: {
-  //   type: String,
-  //   required: true,
-  //   unique: true,
-  // },
   fName: {
     type: String,
     required: true,

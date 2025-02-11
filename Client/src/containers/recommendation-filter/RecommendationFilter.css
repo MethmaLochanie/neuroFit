@@ -1,0 +1,55 @@
+.recommendation-filter {
+    width: 300px;
+    padding: 15px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-family: "Arial", sans-serif;
+  }
+  
+  /* Price Slider Values */
+  .price-values {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #333;
+    margin-top: 5px;
+  }
+  
+  /* Color Selector - Dynamic Grid */
+  .color-selector {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30px, 1fr)); /* Dynamically adjusts */
+    gap: 8px;
+    justify-content: center;
+    padding: 5px;
+    max-width: 100%;
+  }
+  
+  /* Color Button */
+  .color-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Selected Color Highlight */
+  .color-btn.selected {
+    border-color: black;
+  }
+  
+  /* Size Selector - Fix Alignment */
+  .size-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    padding: 10px 0;
+  }
+  

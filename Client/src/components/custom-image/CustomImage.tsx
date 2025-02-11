@@ -8,6 +8,7 @@ interface CustomImageProps {
   height?: string | number; // Optional height
   customStyle?: React.CSSProperties; // Additional inline styles
   className?: string; // Additional CSS class for custom styling
+  onClick?: () => void; // ✅ Add this line to support onClick
 }
 
 const CustomImage: React.FC<CustomImageProps> = ({
@@ -17,6 +18,7 @@ const CustomImage: React.FC<CustomImageProps> = ({
   height,
   customStyle,
   className,
+  onClick, // Accept onClick prop
 }) => {
   return (
     <img
@@ -24,6 +26,7 @@ const CustomImage: React.FC<CustomImageProps> = ({
       alt={alt}
       style={{ width, height, ...customStyle }}
       className={`custom-image ${className}`}
+      onClick={onClick} // ✅ Attach the onClick function
     />
   );
 };
