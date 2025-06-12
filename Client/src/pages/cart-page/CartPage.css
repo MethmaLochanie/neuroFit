@@ -1,9 +1,9 @@
-.cart-page{
-    padding: 40px 10%;
+.cart-page {
+  padding: 40px 10%;
 }
-.cart-page-product-list{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
+.cart-page-product-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
 }

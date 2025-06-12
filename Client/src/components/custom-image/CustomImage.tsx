@@ -1,14 +1,20 @@
 import React from "react";
+import { useSignedImageUrl } from "../../hooks/useSignedImageUrl";
 import "./CustomImage.css";
 
+const AZURE_BLOB_STORAGE_URL = process.env.REACT_APP_AZURE_BLOB_STORAGE_URL;
+if (!AZURE_BLOB_STORAGE_URL) {
+  throw new Error('AZURE_BLOB_STORAGE_URL environment variable is not defined');
+}
+
 interface CustomImageProps {
-  src: string; // Path to the image
-  alt: string; // Alt text for the image
-  width?: string | number; // Optional width
-  height?: string | number; // Optional height
-  customStyle?: React.CSSProperties; // Additional inline styles
-  className?: string; // Additional CSS class for custom styling
-  onClick?: () => void; // ✅ Add this line to support onClick
+  src: string;
+  alt: string;
+  width?: string | number;
+  height?: string | number;
+  customStyle?: React.CSSProperties;
+  className?: string;
+  onClick?: () => void;
 }
 
 const CustomImage: React.FC<CustomImageProps> = ({
@@ -18,15 +24,33 @@ const CustomImage: React.FC<CustomImageProps> = ({
   height,
   customStyle,
   className,
-  onClick, // Accept onClick prop
+  onClick,
 }) => {
+  const { signedUrl, error, loading } = useSignedImageUrl(src);
+
+  if (!src || typeof src !== "string") {
+    return <div style={{ width, height, backgroundColor: "#eee" }} />;
+  }
+
+  const finalSrc = src.startsWith(AZURE_BLOB_STORAGE_URL)
+    ? signedUrl
+    : require(`../../assets/${src}`);
+
+  if (loading) {
+    return <div style={{ width, height, backgroundColor: "#eee" }} />;
+  }
+
+  if (error) {
+    console.error("Error loading image:", error);
+  }
+
   return (
     <img
-      src={require(`../../assets/${src}`)} // Dynamically require image from assets folder
+      src={finalSrc}
       alt={alt}
       style={{ width, height, ...customStyle }}
-      className={`custom-image ${className}`}
-      onClick={onClick} // ✅ Attach the onClick function
+      className={`custom-image ${className || ""}`}
+      onClick={onClick}
     />
   );
 };

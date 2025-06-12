@@ -1,11 +1,18 @@
 .testimonial-card {
-  width: 400px;
+  min-width: 260px;
+  max-width: 420px;
+  width: fit-content;
   padding: 16px;
   background-color: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border: 1px solid #ddd;
   transition: box-shadow 0.3s ease;
+  min-height: 240px;
+  max-height: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .testimonial-card:hover {
@@ -17,6 +24,8 @@
   align-items: center;
   gap: 16px;
   margin-bottom: 12px;
+  flex-direction: row;
+  justify-content: flex-start;
 }
 
 .profile-image {
@@ -27,7 +36,9 @@
 }
 
 .card-details {
-  flex: 1;
+  display: flex;
+  align-items: center;
+  margin-left: 8px;
 }
 
 .card-name {
@@ -38,7 +49,7 @@
 
 .rating-stars {
   font-size: 16px;
-  color: #ffc107; /* Gold color for stars */
+  color: #ffc107;
 }
 
 .card-review {
@@ -46,4 +57,54 @@
   color: #666;
   line-height: 1.5;
   margin: 0;
+  max-height: 48px;
+  overflow-y: auto;
+  min-height: 32px;
+}
+
+.feedback-media {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.feedback-media img,
+.feedback-media .custom-image {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  border: 1px solid #eee;
+}
+
+.user-avatar {
+  background-color: #ff00ff !important;
+  color: #fff !important;
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin-right: 12px;
+  border-radius: 50% !important;
+  width: 50px !important;
+  height: 50px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 50px;
+  min-height: 50px;
+  max-width: 50px;
+  max-height: 50px;
+}
+
+.user-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 180px;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 1.15rem;
+  font-weight: 500;
+  margin-left: 8px;
 }

@@ -6,11 +6,11 @@ import UploadPng from "../upload-png/UploadPng";
 const { Search } = Input;
 
 interface ReusableSearchBarProps {
-  placeholder?: string; // Placeholder text for the search bar
-  onSearch?: (value: string) => void; // Callback for search
-  suffix?: React.ReactNode; // Optional suffix (e.g., an upload icon or any element)
-  size?: "large" | "middle" | "small"; // Size of the search bar
-  enterButton?: boolean | React.ReactNode; // Custom search button
+  placeholder?: string;
+  onSearch?: (value: string) => void;
+  suffix?: React.ReactNode;
+  size?: "large" | "middle" | "small";
+  enterButton?: boolean | React.ReactNode;
 }
 
 const ReusableSearchBar: React.FC<ReusableSearchBarProps> = ({

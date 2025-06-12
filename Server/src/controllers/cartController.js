@@ -1,6 +1,6 @@
 const {
   addToCartService,
-  getCartByUserIdService,
+  getCartItemsByUserIdService,
   removeFromCartService,
   updateCartItemsByIdService,
 } = require("../services/cartService");
@@ -18,10 +18,11 @@ exports.addToCart = async (req, res) => {
   }
 };
 
-//get cart items by userId
 exports.getCartByUserId = async (req, res) => {
   try {
-    const cartItems = await getCartByUserIdService(req.params.userId);
+    const cartItems = await getCartItemsByUserIdService(
+      req.params.customer_mapped_id
+    );
     if (cartItems) {
       res.status(200).json(cartItems);
     } else {
@@ -34,49 +35,40 @@ exports.getCartByUserId = async (req, res) => {
 
 exports.removeFromCart = async (req, res) => {
   try {
-    const removeCartItem = await removeFromCart(req.body);
-    if (removeCartItem) {
-      res
-        .status(201)
-        .json({ message: "removeCartItem registered successfully" });
-    } else {
-      res.status(400).json({ message: "removeCartItem registration failed" });
+    const removedItem = await removeFromCartService(req.params._id);
+
+    if (!removedItem) {
+      return res.status(404).json({ message: "Item not found" });
     }
+
+    res.status(200).json({
+      message: "Item removed successfully",
+      removedItem,
+    });
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    console.error("Delete error:", error);
+    res.status(500).json({
+      message: error.message || "Failed to remove item",
+    });
   }
 };
 
-//remove an item from the cart by using userId
-exports.removeFromCart = async (req, res) => {
-  try {
-    const removeCartItem = await removeFromCartService(
-      req.params.userId,
-      req.body.itemId
-    );
-    if (removeCartItem) {
-      res.status(200).json({ message: "Item removed from cart successfully" });
-    } else {
-      res.status(404).json({ message: "Item not found in cart" });
-    }
-  } catch (error) {
-    res.status(500).json({ message: "Server Error" });
-  }
-};
-
-//update cart items by id
 exports.updateCartItemsById = async (req, res) => {
   try {
     const updatedItem = await updateCartItemsByIdService(
-      req.params.userId,
+      req.params.id,
       req.body
     );
-    if (updatedItem) {
-      res.status(200).json(updatedItem);
-    } else {
-      res.status(404).json({ message: "Item Not Found" });
+
+    if (!updatedItem) {
+      return res.status(404).json({ message: "Item not found" });
     }
+
+    res.status(200).json(updatedItem);
   } catch (error) {
-    res.status(500).json({ message: "Server Error" });
+    console.error("Update error:", error);
+    res.status(500).json({
+      message: error.message || "Failed to update cart item",
+    });
   }
 };

@@ -5,11 +5,11 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const CartSchema = new Schema({
-  userId: {
-    type: String,
+  customer_mapped_id: {
+    type: Number,
     required: true,
   },
-  articleId: {
+  article_id: {
     type: String,
     required: true,
   },
@@ -25,6 +25,10 @@ const CartSchema = new Schema({
     type: String,
     enum: SHIPPING_PAYMENT_TYPE,
     default: SHIPPING_PAYMENT_TYPE.FREE,
+  },
+  size: {
+    type: String,
+    required: true,
   },
 });
 

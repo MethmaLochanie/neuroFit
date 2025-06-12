@@ -2,8 +2,8 @@ import React from "react";
 import "./CustomTitle.css";
 
 interface CustomTitleProps {
-  text: string; // The text for the title
-  color?: string; // Optional prop to customize the line color
+  text: string;
+  color?: string;
 }
 
 const CustomTitle: React.FC<CustomTitleProps> = ({

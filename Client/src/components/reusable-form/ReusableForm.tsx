@@ -1,11 +1,23 @@
-import React from "react";
-import { Form, Input, Button, Row, Col, Select } from "antd";
+import React, { useState, useEffect } from "react";
+import {
+  Form,
+  Input,
+  Button,
+  Row,
+  Col,
+  Select,
+  notification,
+  InputNumber,
+} from "antd";
 
 interface ReusableFormProps {
   isAgeVisible: boolean;
   onSubmit: (values: any) => void;
   buttonName: string;
   isSignupPage: boolean;
+  initialValues?: any;
+  isLoading?: boolean;
+  disableButtonOnUnchanged?: boolean;
 }
 
 const ReusableForm: React.FC<ReusableFormProps> = ({
@@ -13,11 +25,43 @@ const ReusableForm: React.FC<ReusableFormProps> = ({
   onSubmit,
   buttonName = "Submit",
   isSignupPage,
+  initialValues,
+  isLoading = false,
+  disableButtonOnUnchanged = true,
 }) => {
+  const [form] = Form.useForm();
+  const [isFormChanged, setIsFormChanged] = useState(false);
+
+  useEffect(() => {
+    if (initialValues) {
+      form.setFieldsValue(initialValues);
+    }
+  }, [initialValues, form]);
+
+  const handleValuesChange = () => {
+    const currentValues = form.getFieldsValue();
+    const hasChanges = Object.keys(currentValues).some(
+      (key) => currentValues[key] !== initialValues?.[key]
+    );
+
+    if (hasChanges && !isFormChanged) {
+      setIsFormChanged(true);
+      notification.info({
+        message: "Changes Detected",
+        description:
+          "You have unsaved changes. Click Save to update your profile.",
+      });
+    } else if (!hasChanges && isFormChanged) {
+      setIsFormChanged(false);
+    }
+  };
+
   return (
     <Form
+      form={form}
       layout="vertical"
       onFinish={onSubmit}
+      onValuesChange={handleValuesChange}
       style={{ maxWidth: "800px", margin: "auto" }}
     >
       <Row gutter={16}>
@@ -138,47 +182,30 @@ const ReusableForm: React.FC<ReusableFormProps> = ({
             <Form.Item
               label="Age"
               name="age"
-              // rules={[
-              //   {
-              //     required: true,
-              //     message: "Age is required for the profile page",
-              //   },
-              //   {
-              //     type: "number",
-              //     min: 0,
-              //     message: "Age must be a positive number",
-              //   },
-              // ]}
+              rules={[
+                { required: true, message: "Age is required" },
+                () => ({
+                  validator(_, value) {
+                    if (value >= 18 && value <= 60) {
+                      return Promise.resolve();
+                    }
+                    return Promise.reject(
+                      new Error("Age must be between 18 and 60")
+                    );
+                  },
+                }),
+              ]}
             >
-              <Input type="number" placeholder="Age" />
+              <InputNumber
+                min={18}
+                max={60}
+                style={{ width: "100%" }}
+                placeholder="Age"
+              />
             </Form.Item>
           </Col>
         )}
       </Row>
-
-      {/* {isAgeVisible && (
-        <Row gutter={16}>
-          <Col span={12}>
-            <Form.Item
-              label="Age"
-              name="age"
-              rules={[
-                {
-                  required: true,
-                  message: "Age is required for the profile page",
-                },
-                {
-                  type: "number",
-                  min: 0,
-                  message: "Age must be a positive number",
-                },
-              ]}
-            >
-              <Input type="number" placeholder="Age" />
-            </Form.Item>
-          </Col>
-        </Row>
-      )} */}
 
       {isSignupPage && (
         <Row gutter={16}>
@@ -212,6 +239,10 @@ const ReusableForm: React.FC<ReusableFormProps> = ({
         <Button
           type="primary"
           htmlType="submit"
+          disabled={
+            disableButtonOnUnchanged ? !isFormChanged || isLoading : isLoading
+          }
+          loading={isLoading}
           style={{ backgroundColor: "#FD33CE", borderColor: "#FD33CE" }}
         >
           {buttonName}

@@ -1,13 +1,13 @@
 import React from "react";
 import { ArrowRightOutlined } from "@ant-design/icons";
-import "./CustomCard.css";
 import CustomImage from "../custom-image/CustomImage";
+import "./CustomCard.css";
 
 interface CustomCardProps {
-  imageUrl: string; // Image URL for the card
-  title: string; // Title text
-  subtitle: string; // Subtitle text
-  onClick?: () => void; // Optional click handler for the card
+  imageUrl: string;
+  title: string;
+  subtitle: string;
+  onClick?: () => void;
 }
 
 const CustomCard: React.FC<CustomCardProps> = ({

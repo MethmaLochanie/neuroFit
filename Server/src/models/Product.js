@@ -2,15 +2,27 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const productSchema = new Schema({
-  articleId: {
+  _id: {
     type: String,
     required: true,
   },
-  prodName: {
+  article_mapped_id: {
     type: String,
     required: true,
   },
-  prodPrice: {
+  article_id: {
+    type: String,
+    required: true,
+  },
+  product_code: {
+    type: Number,
+    required: true,
+  },
+  prod_name: {
+    type: String,
+    required: true,
+  },
+  price: {
     type: Number,
     required: true,
   },
@@ -18,11 +30,27 @@ const productSchema = new Schema({
     type: Number,
     required: true,
   },
-  prodDesc: {
+  detail_desc: {
     type: String,
     required: true,
   },
-  prodCategory: {
+  imageUrl: {
+    type: String,
+    required: true,
+  },
+  department_name: {
+    type: String,
+    required: true,
+  },
+  department_no: {
+    type: Number,
+    required: true,
+  },
+  colour_group_name: {
+    type: String,
+    required: true,
+  },
+  colour_group_code: {
     type: String,
     required: true,
   },
@@ -52,5 +80,4 @@ const productSchema = new Schema({
     },
   ],
 });
-
 module.exports = mongoose.model("Product", productSchema);

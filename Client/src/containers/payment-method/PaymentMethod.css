@@ -1,60 +1,53 @@
-/* Main Container */
 .payment-method-container {
-    width: 100%;
-    max-width: 500px;
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    border: 1px solid #ddd; /* Subtle border */
-  }
-  
-  /* Title Styling */
-  .payment-method-title {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  .payment-method-subtitle {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 15px;
-  }
-  
-  /* Payment Options */
-  .payment-options {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  /* Individual Payment Option */
-  .radio-option {
-    display: flex;
-    align-items: center;
-    font-size: 16px;
-    padding: 12px;
-    background: #f9f9f9;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  
-  .radio-option:hover {
-    background: #f0f0f0;
-  }
-  
-  /* Radio Button */
-  .radio-option .ant-radio-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  /* Description */
-  .radio-description {
-    font-size: 14px;
-    color: #777;
-  }
-  
+  width: 100%;
+  max-width: 500px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+.payment-method-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.payment-method-subtitle {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.payment-options {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  padding: 12px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.radio-option:hover {
+  background: #f0f0f0;
+}
+
+.radio-option .ant-radio-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.radio-description {
+  font-size: 14px;
+  color: #777;
+}

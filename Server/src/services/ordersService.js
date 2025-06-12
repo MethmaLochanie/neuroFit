@@ -42,10 +42,9 @@ exports.orderService = async ({
   }
 };
 
-//get orders by userId
-exports.getOrdersByUserIdService = async (userId) => {
+exports.getOrdersByUserIdService = async (user_mapped_id) => {
   try {
-    const orders = await Order.find({ userId });
+    const orders = await Order.find({ user_mapped_id });
     if (!orders) {
       throw Error("Orders not found");
     }

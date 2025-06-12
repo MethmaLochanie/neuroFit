@@ -1,39 +1,36 @@
-import React, { useState } from "react";
-import { Radio, Card } from "antd";
+import React from "react";
+import { Radio } from "antd";
 import "./PaymentMethod.css";
 
-const PaymentMethod: React.FC = () => {
-  const [paymentMethod, setPaymentMethod] = useState("credit_card");
+interface PaymentMethodProps {
+  onChange: (value: string) => void;
+  selectedMethod: string;
+}
 
+const PaymentMethod: React.FC<PaymentMethodProps> = ({
+  onChange,
+  selectedMethod,
+}) => {
   return (
     <div className="payment-method-container">
       <h3 className="payment-method-title">Payment Method</h3>
-      <p className="payment-method-subtitle">All transactions are secure and encrypted.</p>
+      <p className="payment-method-subtitle">
+        All transactions are secure and encrypted.
+      </p>
 
-      <Radio.Group 
-        onChange={(e) => setPaymentMethod(e.target.value)} 
-        value={paymentMethod} 
+      <Radio.Group
+        onChange={(e) => onChange(e.target.value)}
+        value={selectedMethod}
         className="payment-options"
       >
-        {/* Credit Card Option */}
-        <Radio className="radio-option" value="credit_card">
-          <div className="radio-content">
-            <strong>Credit Card</strong>
-            <p className="radio-description">We accept all major credit cards.</p>
-          </div>
+        <Radio className="radio-option" value="Credit Card">
+          Credit Card
         </Radio>
-
-        {/* Cash on Delivery Option */}
-        <Radio className="radio-option" value="cash_on_delivery">
-          <div className="radio-content">
-            <strong>Cash on delivery</strong>
-            <p className="radio-description">Pay with cash upon delivery.</p>
-          </div>
+        <Radio className="radio-option" value="Cash on Delivery">
+          Cash on Delivery
         </Radio>
-
-        {/* PayPal Option */}
-        <Radio className="radio-option" value="paypal">
-          <strong>PayPal</strong>
+        <Radio className="radio-option" value="PayPal">
+          PayPal
         </Radio>
       </Radio.Group>
     </div>

@@ -6,9 +6,8 @@ const {
   deleteOrder,
 } = require("../controllers/orderController");
 
-//public routes
 router.post("/placedOrder", order);
-router.get("/getOrders/:userId", getOrdersByUserId);
+router.get("/getOrders/:user_mapped_id", getOrdersByUserId);
 router.delete("/deleteOrder/:orderId", deleteOrder);
 
 module.exports = router;

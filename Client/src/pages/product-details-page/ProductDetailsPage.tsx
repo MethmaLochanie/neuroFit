@@ -1,115 +1,104 @@
-import React from "react";
-import "./ProductDetailsPage.css"; // Import CSS for styling
+import React, { useEffect, useRef, useState } from "react";
 import ProductDetails from "../../containers/product-details/ProductDetails";
 import CustomTitle from "../../components/custom-title/CustomTitle";
-import FeedbackInputForm from "../../containers/feedback-input-form/FeedbackInputForm";
 import ProductCard from "../../components/product-card/ProductCard";
-import FeedbackCard from "../../components/review-card/FeedbackCard";
+import FeedbackInputForm from "../../containers/feedback-input-form/FeedbackInputForm";
+import { AppDispatch, RootState } from "../../redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import { LeftOutlined, RightOutlined } from "@ant-design/icons";
+import useAuth from "../../hooks/useAuth";
+import { loadRecommendations } from "../../redux/slices/recommendationSlice";
+import { useParams } from "react-router-dom";
+import { fetchProductByArticleId } from "../../services/recommendationClient";
+import useGetProductDetailsByProductCode from "../../services/useGetProductDetailsByProductCode";
+import "./ProductDetailsPage.css";
 
 const ProductDetailsPage: React.FC = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const { products: recProducts } = useSelector(
+    (state: RootState) => state.recommendations
+  );
+
+  const { user } = useAuth();
+
+  useEffect(() => {
+    if (user?.customer_mapped_id && !user?.isNewUser && recProducts.length === 0) {
+      dispatch(loadRecommendations({ userId: user.customer_mapped_id, k: 10 }));
+    } else if (
+      user?.age &&
+      recProducts.length === 0
+    ) {
+      dispatch(loadRecommendations({ age: user.age, k: 10 }));
+    }
+  }, [user, recProducts.length, dispatch]);
+
+  const scrollRef = useRef<HTMLDivElement | null>(null);
+
+  const scroll = (direction: "left" | "right") => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({
+        left: direction === "left" ? -300 : 300,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  const [product, setProduct] = useState<any>(null);
+
+  const { articleId } = useParams<{ articleId: string }>();
+  useEffect(() => {
+    if (articleId) {
+      fetchProductByArticleId(articleId).then(setProduct).catch(console.error);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [articleId]);
+
+  const { productDetails } = useGetProductDetailsByProductCode(
+    product?.product_code
+  );
   return (
     <div className="product-details-page">
-      {/* Product Details Section */}
       <section className="product-section">
         <ProductDetails
-          title="Raven Hoodie With Black Colored Design"
-          description="A stylish black hoodie with a comfortable fit."
-          price="65.00"
-          images={[
-            "Blue_Cute_Dog.png",
-            "Neutral_Minimalism.png",
-            "Grey_Black.png",
-          ]}
-          colors={["black", "red", "gold", "pink"]}
-          sizes={["XS", "S", "M", "L", "XL"]}
-          rating={3.5}
-          comments={120}
+          title={product?.prod_name || "Loading..."}
+          description={product?.detail_desc || ""}
+          price={product?.price?.toFixed(2) || "0.00"}
+          productDetails={productDetails}
+          colors={product?.prodColors || []}
+          sizes={product?.sizes || []}
+          userId={user?.customer_mapped_id || ""}
         />
       </section>
-
-      {/* Feedback Input Section */}
-      <section className="feedback-section">
+      <section className="subtitle-section">
         <CustomTitle text="Add Feedback" />
         <FeedbackInputForm />
       </section>
-
-      {/* Feedback List Section */}
-      <section className="feedback-list-section">
-        <CustomTitle text="Feedbacks" />
-        <div className="product-list">
-          <FeedbackCard
-            imageUrl={""}
-            name={"Methma"}
-            feedback={"blah"}
-            rating={5}
-          />
-          <FeedbackCard
-            imageUrl={""}
-            name={"Methma"}
-            feedback={"blah"}
-            rating={5}
-          />
-          <FeedbackCard
-            imageUrl={""}
-            name={"Methma"}
-            feedback={"blah"}
-            rating={5}
-          />
-          <FeedbackCard
-            imageUrl={""}
-            name={"Methma"}
-            feedback={"blah"}
-            rating={5}
-          />
-          <FeedbackCard
-            imageUrl={""}
-            name={"Methma"}
-            feedback={"blah"}
-            rating={5}
-          />
-        </div>
-      </section>
-
-      {/* Recommendations Section */}
       <section className="recommendations-section">
         <CustomTitle text="Your Recommendations" />
-        <div className="product-list">
-          <ProductCard
-            imageUrl="Blue_Cute_Dog.png"
-            title="Hoodie"
-            price="$5"
-            rating={1.5}
-          />
-          <ProductCard
-            imageUrl="Neutral_Minimalism.png"
-            title="Sweater"
-            price="$8"
-            rating={4.0}
-          />
-          <ProductCard
-            imageUrl="Grey_Black.png"
-            title="Jacket"
-            price="$12"
-            rating={4.5}
-          />
-          <ProductCard
-            imageUrl="Neutral_Minimalism.png"
-            title="Sweater"
-            price="$8"
-            rating={4.0}
-          />
-          <ProductCard
-            imageUrl="Neutral_Minimalism.png"
-            title="Sweater"
-            price="$8"
-            rating={4.0}
-          />
-          <ProductCard
-            imageUrl="Neutral_Minimalism.png"
-            title="Sweater"
-            price="$8"
-            rating={4.0}
-          />
+        <div className="products-grid-wrapper">
+          <button
+            className="scroll-button scroll-left"
+            onClick={() => scroll("left")}
+          >
+            <LeftOutlined />
+          </button>
+          <div className="products-grid" ref={scrollRef}>
+            {recProducts.map((product) => (
+              <ProductCard
+                key={product.article_id}
+                articleId={product.article_id}
+                imageUrl={product.imageUrl}
+                title={product.prod_name}
+                price={product.price}
+              />
+            ))}
+          </div>
+          <button
+            className="scroll-button scroll-right"
+            onClick={() => scroll("right")}
+          >
+            <RightOutlined />
+          </button>
         </div>
       </section>
     </div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./ColorSelector.css";
 
 interface ColorSelectorProps {
@@ -10,7 +10,12 @@ const ColorSelector: React.FC<ColorSelectorProps> = ({ colors, onSelect }) => {
   const [selectedColor, setSelectedColor] = useState("");
 
   return (
-    <div className="color-selector" style={{ gridTemplateColumns: `repeat(${Math.min(colors.length, 6)}, 1fr)` }}>
+    <div
+      className="color-selector"
+      style={{
+        gridTemplateColumns: `repeat(${Math.min(colors.length, 6)}, 1fr)`,
+      }}
+    >
       {colors.map((color, index) => (
         <button
           key={index}

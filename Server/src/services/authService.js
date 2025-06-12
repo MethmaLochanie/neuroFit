@@ -3,7 +3,6 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 
-//register a new user
 exports.registerUser = async ({
   fName,
   lName,
@@ -25,18 +24,26 @@ exports.registerUser = async ({
       throw new Error("User already exists but not verified");
     }
 
+    // Find the highest customer_mapped_id
+    const lastUser = await User.findOne({ customer_mapped_id: { $exists: true } })
+      .sort({ customer_mapped_id: -1 })
+      .lean();
+    const nextCustomerMappedId = lastUser ? lastUser.customer_mapped_id + 1 : 1;
+
     const hashedPassword = await bcrypt.hash(password, 12);
     const newUser = new User({
-        fName,
-        lName,
-        email,
-        country,
-        city,
-        postalCode,
-        phoneNumber,
-        age,
-        password : hashedPassword,
-        role,
+      fName,
+      lName,
+      email,
+      country,
+      city,
+      postalCode,
+      phoneNumber,
+      age,
+      password: hashedPassword,
+      role,
+      customer_mapped_id: nextCustomerMappedId,
+      isNewUser: true
     });
 
     const savedUser = await newUser.save();
@@ -47,18 +54,17 @@ exports.registerUser = async ({
   }
 };
 
-// login a user
 exports.loginUser = async ({ email, password }) => {
   const userExists = await User.findOne({ email });
 
   if (!userExists) {
-    throw new Error("Invalid Email"); // Throw error if the email is invalid
+    throw new Error("Invalid Email");
   }
 
   const isPasswordCorrect = await bcrypt.compare(password, userExists.password);
 
   if (!isPasswordCorrect) {
-    throw new Error("Invalid Password"); // Throw error if the password is invalid
+    throw new Error("Invalid Password");
   }
 
   const token = jwt.sign(
@@ -76,9 +82,11 @@ exports.loginUser = async ({ email, password }) => {
     token,
     user: {
       id: userExists._id,
-      name: userExists.name,
+      customer_mapped_id: userExists.customer_mapped_id,
+      age: userExists.age,
       email: userExists.email,
       role: userExists.role,
+      isNewUser: userExists.isNewUser
     },
   };
 };

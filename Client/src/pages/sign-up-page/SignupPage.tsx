@@ -1,9 +1,9 @@
 import React from "react";
 import { message } from "antd";
-import "./SignupPage.css"; // Import custom styles if needed
 import { signupUser } from "../../services/authService";
 import { useNavigate } from "react-router-dom";
 import ReusableForm from "../../components/reusable-form/ReusableForm";
+import "./SignupPage.css";
 
 const SignupPage: React.FC = () => {
   const navigate = useNavigate();

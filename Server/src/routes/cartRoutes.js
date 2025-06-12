@@ -7,10 +7,9 @@ const {
   updateCartItemsById,
 } = require("../controllers/cartController");
 
-//public routes
 router.post("/addToCart", addToCart);
-router.delete("/removeFromCart/:userId", removeFromCart);
-router.get("/items/:userId", getCartByUserId);
-router.put("/update/: id", updateCartItemsById);
+router.delete("/remove/:_id", removeFromCart);
+router.get("/items/:customer_mapped_id", getCartByUserId);
+router.put("/update/:id", updateCartItemsById);
 
 module.exports = router;

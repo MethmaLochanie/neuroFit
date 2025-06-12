@@ -1,3 +1,3 @@
 module.exports = {
-    SHIPPING_PAYMENT_TYPE: ['FREE', 'PAID'],
-  }
+  SHIPPING_PAYMENT_TYPE: ["FREE", "PAID"],
+};

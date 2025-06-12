@@ -1,10 +1,16 @@
 import React from "react";
-import "./CartSummary.css";
+import { useNavigate } from "react-router-dom";
 import CustomButton from "../../components/custom-button/CustomButton";
+import "./CartSummary.css";
 
 type Props = { subTotal: number; shippingCost: number };
 
 const CartSummary: React.FC<Props> = ({ subTotal, shippingCost }) => {
+  const navigate = useNavigate();
+  const handleCheckOut = () => {
+    navigate("/checkout");
+  };
+
   return (
     <div className="cart-summary-container">
       <div className="cart-summary">
@@ -21,7 +27,9 @@ const CartSummary: React.FC<Props> = ({ subTotal, shippingCost }) => {
           <span>Grand Total:</span>
           <span>${(subTotal + shippingCost).toFixed(2)}</span>
         </div>
-        <CustomButton className="checkout-btn">Proceed to Checkout</CustomButton>
+        <CustomButton className="checkout-btn" onClick={handleCheckOut}>
+          Proceed to Checkout
+        </CustomButton>
       </div>
     </div>
   );

@@ -5,56 +5,88 @@ import {
   HeartOutlined,
   UserOutlined,
   ShoppingCartOutlined,
+  BulbOutlined,
 } from "@ant-design/icons";
-import "./Navbar.css";
-import ReusableSearchBar from "../reusable-search-bar/ReusableSearchBar";
 import CustomButton from "../custom-button/CustomButton";
 import { AuthContext } from "../../context/AuthContext";
+import showNotification from "../custom-notification/CustomNotification";
+import CustomImage from "../custom-image/CustomImage";
+import { useDispatch } from "react-redux";
+import { clearRecommendations } from "../../redux/slices/recommendationSlice";
+import "./Navbar.css";
 
 export const Navbar: React.FC = () => {
-  const location = useLocation();
   const auth = useContext(AuthContext);
-  // const { login } = useAuth();
   const navigate = useNavigate();
-
-  // Check if user is logged in
+  const dispatch = useDispatch();
+  const handleArrowClick = () => {
+    navigate("/");
+  };
+  const handleHeartButton = () => {
+    navigate("/favourites");
+  };
+  const handleUserButton = () => {
+    navigate("/profile");
+  };
+  const handleCartButton = () => {
+    navigate("/cart");
+  };
   const isLoggedIn = auth?.user !== null;
 
-  // Define paths where the search bar should be hidden
-  const hiddenSearchPaths = ["/signup", "/login", "/recommendations"];
+  const handleRecommendationsButton = () => {
+    navigate("/recommendations");
+  };
 
   return (
     <nav className="navbar">
       <div className="navbar-left">
+        <CustomImage
+          src="image.png"
+          alt="NeuroFit Logo"
+          width={40}
+          height={40}
+        />
         <span className="navbar-logo">NeuroFit</span>
         <ul className="navbar-links">
-          <li>Home</li>
-          <li>Categories</li>
+          <li onClick={handleArrowClick}>Home</li>
         </ul>
       </div>
 
       <div className="navbar-right">
-        {/* Hide search bar only for specified routes or if user is logged in */}
-        {!hiddenSearchPaths.includes(location.pathname) && isLoggedIn && (
-          <div className="navbar-search">
-            <ReusableSearchBar
-              placeholder="Search for items"
-              onSearch={(value) => console.log("Custom Search Value:", value)}
-            />
-          </div>
-        )}
-
         {isLoggedIn && (
           <>
             <div className="navbar-icons">
-              <Button icon={<HeartOutlined />} type="text" />
-              <Button icon={<UserOutlined />} type="text" />
-              <Button icon={<ShoppingCartOutlined />} type="text" />
+              <Button
+                icon={<HeartOutlined />}
+                type="text"
+                onClick={handleHeartButton}
+              />
+              <Button
+                icon={<UserOutlined />}
+                type="text"
+                onClick={handleUserButton}
+              />
+              <Button
+                icon={<ShoppingCartOutlined />}
+                type="text"
+                onClick={handleCartButton}
+              />
+              <Button
+                icon={<BulbOutlined />}
+                type="text"
+                onClick={handleRecommendationsButton}
+              />
             </div>
             <div className="navbar-btn">
               <CustomButton
                 onClick={() => {
                   auth?.logout();
+                  dispatch(clearRecommendations());
+                  showNotification({
+                    message: "Success",
+                    description: "Log out. See you around!",
+                    type: "success",
+                  });
                   navigate("/");
                 }}
               >
@@ -64,7 +96,6 @@ export const Navbar: React.FC = () => {
           </>
         )}
 
-        {/* Hide Sign Up & Login buttons when user is logged in */}
         {!isLoggedIn && (
           <>
             <div className="navbar-btn">

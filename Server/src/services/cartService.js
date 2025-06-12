@@ -1,19 +1,21 @@
 const Cart = require("../models/Cart");
 
 exports.addToCartService = async ({
-  userId,
-  articleId,
+  customer_mapped_id,
+  article_id,
   quantity,
   subtotal,
   shipping,
+  size,
 }) => {
   try {
     const newAddToCartItem = new Cart({
-      userId,
-      articleId,
+      customer_mapped_id,
+      article_id,
       quantity,
       subtotal,
       shipping,
+      size,
     });
 
     const saveAddToCartItem = await newAddToCartItem.save();
@@ -24,10 +26,9 @@ exports.addToCartService = async ({
   }
 };
 
-//get cart items by userId
-exports.getCartItemsByUserIdService = async (userId) => {
+exports.getCartItemsByUserIdService = async (customer_mapped_id) => {
   try {
-    const cartItems = await Cart.find({ userId });
+    const cartItems = await Cart.find({ customer_mapped_id });
     if (!cartItems) {
       throw Error("Cart items not found");
     }
@@ -37,29 +38,28 @@ exports.getCartItemsByUserIdService = async (userId) => {
   }
 };
 
-//item remove from cart
-exports.removeFromCartService = async ({ userId, articleId }) => {
+exports.removeFromCartService = async (_id) => {
   try {
-    const removeCartItem = await Cart.findOneAndDelete({
-      userId,
-      articleId,
-    });
-
-    return removeCartItem;
+    const result = await Cart.findByIdAndDelete(_id);
+    return result;
   } catch (error) {
-    return { message: error.message };
+    console.error("Delete service error:", error);
+    throw error;
   }
 };
-
-//update cart items
 exports.updateCartItemsByIdService = async (id, update) => {
   try {
-    const item = await Cart.findOneAndUpdate({ id }, update, { new: true });
+    const item = await Cart.findOneAndUpdate(
+      { _id: id },
+      { $set: update },
+      { new: true }
+    );
+
     if (!item) {
       throw Error("Item not found");
     }
-    return user;
+    return item;
   } catch (error) {
-    return { message: error.message };
+    throw error;
   }
 };

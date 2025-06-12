@@ -19,7 +19,7 @@ exports.order = async (req, res) => {
 
 exports.getOrdersByUserId = async (req, res) => {
   try {
-    const orders = await getOrdersByUserIdService(req.params.userId);
+    const orders = await getOrdersByUserIdService(req.params.user_mapped_id);
     if (orders) {
       res.status(200).json(orders);
     } else {
@@ -30,7 +30,6 @@ exports.getOrdersByUserId = async (req, res) => {
   }
 };
 
-//remove an item from the cart by using userId
 exports.deleteOrder = async (req, res) => {
   try {
     const deleteOrder = await deleteOrderByOrderIdService(

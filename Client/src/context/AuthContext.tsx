@@ -1,22 +1,20 @@
 import React, { createContext, useState, ReactNode, useEffect } from "react";
+import { UserRes } from "../types/types";
 
-// Define the AuthContextType interface
 export interface AuthContextType {
-  user: any; // Replace `any` with a proper User type if available
+  user: UserRes | null;
   login: (userData: any) => void;
   logout: () => void;
 }
 
-// Create AuthContext with a null default value
 export const AuthContext = createContext<AuthContextType | null>(null);
 
-// Define props type for AuthProvider
 interface AuthProviderProps {
   children: ReactNode;
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [user, setUser] = useState<any>(null); // Replace `any` with a proper type
+  const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -25,10 +23,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   }, []);
 
-
   const login = (userData: any) => {
-    setUser(userData);
-    localStorage.setItem("user", JSON.stringify(userData));
+    setUser(userData.user);
+    localStorage.setItem("user", JSON.stringify(userData.user));
   };
 
   const logout = () => {

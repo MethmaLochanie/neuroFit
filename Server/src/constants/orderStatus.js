@@ -1,3 +1,3 @@
 module.exports = {
-    ORDER_STATUS: ['PENDING', 'CANCELLED', 'COMPLETED']
-  }
+  ORDER_STATUS: ["PENDING", "CANCELLED", "COMPLETED"],
+};

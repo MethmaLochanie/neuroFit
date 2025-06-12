@@ -3,15 +3,15 @@ const Schema = mongoose.Schema;
 const { FEEDBACK_CATEGORY } = require("../constants/feedbackCategories");
 
 const feedbackSchema = new Schema({
-  userId: {
+  customer_mapped_id: {
     type: String,
     required: true,
   },
-  articleId: {
+  article_id: {
     type: String,
     required: true,
   },
-  feedback: {
+  feedback_description: {
     type: String,
     required: true,
   },
@@ -20,7 +20,7 @@ const feedbackSchema = new Schema({
     enum: FEEDBACK_CATEGORY,
     default: FEEDBACK_CATEGORY.FEEDBACK,
   },
-  ratings: {
+  rating: {
     type: Number,
     required: true,
   },

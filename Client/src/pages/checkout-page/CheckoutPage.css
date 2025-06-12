@@ -1,71 +1,62 @@
-/* Main Container */
 .checkout-container {
-    display: flex;
-    flex-direction: column;
-    /* align-items: center; */
-    padding: 40px 10%;
-    background-color: #f8f8f8;
-  }
-  
-  /* Title Styling */
-  .checkout-title {
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 20px;
-    padding-left: 12px;
-  }
-  
-  /* Order Summary Section */
-  .order-summary-container {
-    width: 100%;
-    max-width: 500px;
-    margin-bottom: 30px;
-  }
-  
-  /* Checkout Row: Form and Payment side by side */
-  .checkout-row {
-    display: flex;
-    justify-content: space-between;
-    gap: 50px;
-    width: 100%;
-    max-width: 1000px;
-    padding: 50px;
-  }
-  
-  /* Form Section */
-  .form-container {
-    flex: 1;
-    background: white;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Payment Method Section */
-  .payment-method-container {
-    flex: 1;
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: none; /* Removed heavy shadow */
-    border: 1px solid #ddd; /* Added a subtle border */
-  }
-  
-  /* Checkout Button */
-  .checkout-button {
-    width: 100%;
-    padding: 12px;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 5px;
-    background-color: #ff4081;
-    color: white;
-    transition: background 0.3s ease;
-    margin-top: 10px;
-  }
-  
-  .checkout-button:hover {
-    background-color: #e6005c;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  padding: 40px 10%;
+  background-color: #f8f8f8;
+}
+
+.checkout-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+  padding-left: 12px;
+}
+
+.order-summary-container {
+  width: 100%;
+  max-width: 500px;
+  margin-bottom: 30px;
+}
+
+.checkout-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+  width: 100%;
+  max-width: 1000px;
+  padding: 50px;
+}
+
+.form-container {
+  flex: 1;
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.payment-method-container {
+  flex: 1;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: none;
+  border: 1px solid #ddd;
+}
+
+.checkout-button {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  background-color: #ff4081;
+  color: white;
+  transition: background 0.3s ease;
+  margin-top: 10px;
+}
+
+.checkout-button:hover {
+  background-color: #e6005c;
+}

@@ -1,81 +1,63 @@
 import React from "react";
-import OrderHistory, {
-  Order,
-  ORDER_STATUS,
-  PAYMENT_METHODS,
-} from "../../containers/order-history/OrderHistory";
-import ProfileCard from "../../containers/profile-card-page/ProfileCard";
+import OrderHistory from "../../containers/order-history/OrderHistory";
 import ReusableForm from "../../components/reusable-form/ReusableForm";
-import './ProfilePage.css'
+import ProfileCard from "../../containers/profile-card-page/ProfileCard";
+import { useUserByCustomerMappedId } from "../../hooks/useUserByCustomerMappedId";
+import { useUpdateUserProfile } from "../../hooks/useUpdateUserProfile";
+import showNotification from "../../components/custom-notification/CustomNotification";
+import useAuth from "../../hooks/useAuth";
+import useUserOrders from "../../hooks/userOrders";
+import "./ProfilePage.css";
 
 const ProfilePage: React.FC = () => {
-  const orders: Order[] = [
-    {
-      id: "#123456789",
-      date: "2 June 2023 2:40 PM",
-      estimatedDelivery: "8 June 2023",
-      status: ORDER_STATUS.PENDING,
-      paymentMethod: PAYMENT_METHODS.CASH,
-      items: [
-        {
-          image: "black_tshirt.jpg",
-          name: "Black Printed T-shirt",
-          color: "Pink",
-          quantity: 1,
-          total: 23.0,
-        },
-      ],
-    },
-    {
-      id: "#987654321",
-      date: "5 June 2023 4:30 PM",
-      estimatedDelivery: "10 June 2023",
-      status: ORDER_STATUS.CANCELLED,
-      paymentMethod: PAYMENT_METHODS.CARD,
-      items: [
-        {
-          image: "printed_cote.jpg",
-          name: "Printed Blue & White Cote",
-          color: "White",
-          quantity: 1,
-          total: 143.0,
-        },
-      ],
-    },
-    {
-      id: "#564738291",
-      date: "10 June 2023 1:15 PM",
-      estimatedDelivery: "15 June 2023",
-      status: ORDER_STATUS.COMPLETED,
-      paymentMethod: PAYMENT_METHODS.ONLINE,
-      items: [
-        {
-          image: "blue_shirt.jpg",
-          name: "Blue Shirt",
-          color: "Blue",
-          quantity: 1,
-          total: 93.0,
-        },
-      ],
-    },
-  ];
+  const { user: authUser } = useAuth();
+  const customer_mapped_id = authUser?.customer_mapped_id;
+  const { user: fetchedUser } = useUserByCustomerMappedId(customer_mapped_id);
+  const { updateProfile, isLoading } = useUpdateUserProfile();
+  const { orders: userOrders } = useUserOrders(customer_mapped_id ?? 0);
+
+  const handleFormSubmit = async (values: any) => {
+    if (!customer_mapped_id) {
+      showNotification({
+        message: "Update Failed",
+        description: "User ID not found. Please try again later.",
+        type: "error",
+      });
+      return;
+    }
+
+    try {
+      await updateProfile(customer_mapped_id, values);
+    } catch (error) {
+      console.error("Profile update failed:", error);
+    }
+  };
+
+  const initialFormValues = {
+    fName: fetchedUser?.fName || "",
+    lName: fetchedUser?.lName || "",
+    email: fetchedUser?.email || "",
+    country: fetchedUser?.country || "",
+    city: fetchedUser?.city || "",
+    postalCode: fetchedUser?.postalCode || "",
+    phoneNumber: fetchedUser?.phoneNumber || "",
+    age: fetchedUser?.age || "",
+  };
+
+  const userName = `${fetchedUser?.fName} ${fetchedUser?.lName}` || "User";
 
   return (
     <div className="profile-page">
-      <ProfileCard
-        name="Alexa Rawles"
-        profilePicture="Blue_Cute_Dog.png"
-        email="alexarawles@gmail.com"
-      />
+      <ProfileCard name={userName} email={fetchedUser?.email || ""} />
       <ReusableForm
-        buttonName="Edit"
+        buttonName="Save"
         isAgeVisible={true}
-        onSubmit={function (values: any): void {
-          throw new Error("Function not implemented.");
-        }}
+        onSubmit={handleFormSubmit}
         isSignupPage={false}
+        initialValues={initialFormValues}
+        isLoading={isLoading}
       />
-      <OrderHistory orders={orders} />
+      <OrderHistory orders={userOrders} />
     </div>
   );
 };

@@ -6,7 +6,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px; /* Space between icon and text */
+  gap: 8px;
   transition: all 0.3s ease;
 }
 
@@ -18,12 +18,12 @@
 }
 
 .custom-button:hover {
-  transform: scale(1.05); /* Slight hover effect */
+  transform: scale(1.05);
   opacity: 0.9;
 }
 
 .custom-button:active {
-  transform: scale(0.98); /* Slight click effect */
+  transform: scale(0.98);
 }
 
 .custom-button.add-to-cart {
@@ -38,9 +38,8 @@
   color: #333;
 }
 
-/* Circular Button Styles */
 .circular-button {
-  background-color: #fff; /* Default background */
+  background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border: 2px solid #f0f0f0;
 }

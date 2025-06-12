@@ -1,7 +1,6 @@
 const User = require("../models/User");
 const crypto = require("crypto");
 
-// get user by Email
 exports.getUserByEmail = async (email) => {
   try {
     const user = await User.findOne({ email }).select("-password");
@@ -10,11 +9,10 @@ exports.getUserByEmail = async (email) => {
     }
     return user;
   } catch (error) {
-    return { message: error.message };
+    throw error;
   }
 };
 
-// get user by userId
 exports.getUserByUserIdService = async (userId) => {
   try {
     const user = await User.findOne({ userId });
@@ -23,19 +21,77 @@ exports.getUserByUserIdService = async (userId) => {
     }
     return user;
   } catch (error) {
-    return { message: error.message };
+    throw error;
   }
 };
 
-//update user details
-exports.updateUserDetailsService = async (userId, update) => {
+exports.updateUserDetailsService = async (customer_mapped_id, updateData) => {
   try {
-    const user = await User.findOneAndUpdate({ userId }, update, { new: true });
+    const requiredFields = [
+      "fName",
+      "lName",
+      "email",
+      "country",
+      "city",
+      "postalCode",
+      "phoneNumber",
+    ];
+    const missingFields = requiredFields.filter((field) => !updateData[field]);
+
+    if (missingFields.length > 0) {
+      throw new Error(`Missing required fields: ${missingFields.join(", ")}`);
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(updateData.email)) {
+      throw new Error("Invalid email format");
+    }
+
+    // // Validate phone number format (basic validation)
+    // const phoneRegex = /^\+?[\d\s-]{10,}$/;
+    // if (!phoneRegex.test(updateData.phoneNumber)) {
+    //   throw new Error('Invalid phone number format');
+    // }
+
+    const user = await User.findOneAndUpdate(
+      { customer_mapped_id },
+      {
+        $set: {
+          fName: updateData.fName,
+          lName: updateData.lName,
+          email: updateData.email,
+          country: updateData.country,
+          city: updateData.city,
+          postalCode: updateData.postalCode,
+          phoneNumber: updateData.phoneNumber,
+          age: updateData.age,
+          updatedAt: new Date(),
+        },
+      },
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+
     if (!user) {
-      throw Error("User not found");
+      throw new Error("User not found");
+    }
+
+    return user;
+  } catch (error) {
+    throw error;
+  }
+};
+
+exports.getUserByCustomerMappedIdService = async (customer_mapped_id) => {
+  try {
+    const user = await User.findOne({ customer_mapped_id });
+    if (!user) {
+      throw new Error("User not found");
     }
     return user;
   } catch (error) {
-    return { message: error.message };
+    throw error;
   }
 };

@@ -1,31 +1,82 @@
-import React from "react";
-import { Rate } from "antd";
-import "./FeedbackCard.css";
+import React, { useState } from "react";
+import { Avatar, Spin, Modal } from "antd";
 import StarRating from "../star-rating/StarRating";
+import { useUserByCustomerMappedId } from "../../hooks/useUserByCustomerMappedId";
+import CustomImage from "../custom-image/CustomImage";
+import "./FeedbackCard.css";
 
 interface FeedbackCardProps {
-  imageUrl: string; // URL for the user's profile picture
-  name: string; // Name of the user
-  feedback: string; // Review text
-  rating: number; // Rating value
+  customerMappedId: number;
+  title: string;
+  feedback: string;
+  rating: number;
+  media?: string[];
 }
 
 const FeedbackCard: React.FC<FeedbackCardProps> = ({
-  imageUrl,
-  name,
+  customerMappedId,
+  title,
   feedback,
   rating,
+  media,
 }) => {
+  const {
+    user: fetchedUser,
+    loading: userLoading,
+    error: userError,
+  } = useUserByCustomerMappedId(customerMappedId);
+  const userName = `${fetchedUser?.fName} ${fetchedUser?.lName}` || "User";
+  const initial = userName.charAt(0).toUpperCase();
+  const [previewVisible, setPreviewVisible] = useState(false);
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
+
   return (
     <div className="testimonial-card">
       <div className="card-header">
-        <img src={imageUrl} alt={name} className="profile-image" />
+        <div className="form-header">
+          <Avatar size={50} className="user-avatar">
+            {userLoading ? <Spin /> : initial}
+          </Avatar>
+          {userError && <span className="user-error">{userError}</span>}
+          <span className="user-name">{userName}</span>
+        </div>
         <div className="card-details">
           <StarRating rating={rating} readonly />
         </div>
       </div>
-      <h3 className="card-name">{name}</h3>
+      <h3 className="card-name">{title}</h3>
       <p className="card-review">{feedback}</p>
+      {media && media.length > 0 && (
+        <div className="feedback-media">
+          {media.map((url, idx) => (
+            <CustomImage
+              key={idx}
+              src={url}
+              alt="Picture of the feedback"
+              onClick={() => {
+                setPreviewImage(url);
+                setPreviewVisible(true);
+              }}
+              customStyle={{ cursor: "pointer" }}
+            />
+          ))}
+          <Modal
+            open={previewVisible}
+            footer={null}
+            onCancel={() => setPreviewVisible(false)}
+            centered
+            width={400}
+          >
+            {previewImage && (
+              <CustomImage
+                src={previewImage}
+                alt="Picture of the feedback"
+                customStyle={{ width: "100%", borderRadius: 12 }}
+              />
+            )}
+          </Modal>
+        </div>
+      )}
     </div>
   );
 };

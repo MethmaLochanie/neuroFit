@@ -49,9 +49,9 @@
 }
 
 .navbar-icons {
-  display: flex; /* Ensures icons are in a row */
-  align-items: center; /* Vertically centers the icons */
-  gap: 10px; /* Adds space between the icons */
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .navbar-icons .ant-btn {

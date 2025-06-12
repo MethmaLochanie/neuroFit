@@ -1,7 +1,12 @@
 import { notification } from "antd";
-import { CheckCircleOutlined, CloseCircleOutlined, ExclamationCircleOutlined, InfoCircleOutlined } from "@ant-design/icons";
+import {
+  CheckCircleOutlined,
+  CloseCircleOutlined,
+  ExclamationCircleOutlined,
+  InfoCircleOutlined,
+} from "@ant-design/icons";
 
-type NotificationType = "success" | "error" | "warning" | "info";
+export type NotificationType = "success" | "error" | "warning" | "info";
 
 interface NotificationProps {
   message: string;
@@ -9,13 +14,11 @@ interface NotificationProps {
   type?: NotificationType;
 }
 
-/**
- * Function to show a custom notification
- * @param message - Notification Title
- * @param description - Notification Description
- * @param type - Type of Notification (success, error, warning, info)
- */
-const showNotification = ({ message, description, type = "info" }: NotificationProps) => {
+const showNotification = ({
+  message,
+  description,
+  type = "info",
+}: NotificationProps) => {
   const icons = {
     success: <CheckCircleOutlined style={{ color: "#52c41a" }} />,
     error: <CloseCircleOutlined style={{ color: "#ff4d4f" }} />,
@@ -27,7 +30,7 @@ const showNotification = ({ message, description, type = "info" }: NotificationP
     message,
     description,
     icon: icons[type],
-    duration: 3, // Auto-close in 3 seconds
+    duration: 3,
     placement: "topRight",
   });
 };

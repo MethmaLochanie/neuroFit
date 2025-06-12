@@ -3,6 +3,12 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
+  customer_id: {
+    type: String,
+  },
+  customer_mapped_id: {
+    type: Number,
+  },
   fName: {
     type: String,
     required: true,
@@ -45,6 +51,10 @@ const userSchema = new Schema({
     enum: ROLES,
     default: ROLES.CUSTOMER,
   },
+  isNewUser: {
+    type: Boolean,
+    default: true
+  }
 });
 
 module.exports = mongoose.model("User", userSchema);

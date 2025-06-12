@@ -1,12 +1,13 @@
 .custom-image {
-  object-fit: cover; /* Ensures the image fits nicely */
+  object-fit: cover;
   display: block;
-  border-radius: 8px; /* Default rounded corners */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Default shadow */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-right: 8px;
 }
 
 .custom-image:hover {
-  transform: scale(1.05); /* Slight zoom on hover */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* More pronounced shadow on hover */
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }

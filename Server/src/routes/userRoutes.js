@@ -5,12 +5,18 @@ const {
   getUserByEmail,
   getUserByUserId,
   updateUserByUserId,
+  getUserByCustomerMappedId,
 } = require("../controllers/userController");
 
-//protected routes
+router.put("/user/update/:customer_mapped_id", updateUserByUserId);
+router.get(
+  "/user/by-customer-mapped-id/:customer_mapped_id",
+  getUserByCustomerMappedId
+);
+
 router.get("/user/:email", authMiddleware, getUserByEmail);
 router.get("/user/:userId", getUserByUserId);
-router.put("/user/update/: userId", updateUserByUserId);
+
 //dlte
 
 module.exports = router;

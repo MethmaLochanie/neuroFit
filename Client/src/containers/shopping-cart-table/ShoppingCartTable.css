@@ -1,11 +1,11 @@
 .ant-table-thead > tr > th {
-  color: #fff; /* White text for header */
+  color: #fff;
   text-align: center;
   font-weight: bold;
 }
 
 .ant-table-tbody > tr > td {
-  text-align: center; /* Center-align table content */
+  text-align: center;
 }
 
 .cart-table-product-details {
@@ -24,19 +24,19 @@
 .cart-table-product-name {
   font-weight: bold;
   margin: 0;
-  text-align: left; /* Left-align the product name */
+  text-align: left;
 }
 
 .cart-table-product-attributes {
   color: #666;
   margin: 0;
   font-size: 12px;
-  text-align: left; /* Left-align product attributes */
+  text-align: left;
 }
 
 .price {
   font-weight: bold;
-  color: #8f1362; /* Updated price color */
+  color: #8f1362;
 }
 
 .quantity-input {
@@ -50,4 +50,11 @@
 
 .delete-button {
   color: #f5222d;
+}
+.order-item-image {
+  width: 60px;
+  height: 60px;
+  border-radius: 5px;
+  margin-right: 15px;
+  object-fit: cover;
 }

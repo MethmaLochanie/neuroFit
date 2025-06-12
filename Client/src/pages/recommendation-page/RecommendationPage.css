@@ -1,44 +1,178 @@
-.recommendation-page {
-    display: flex;
+/* RecommendationPage.css */
+.recs-container {
+  max-width: 1200px;
+  margin: 50px auto 0;
+  padding: 0 20px;
+  position: relative;
+}
+
+.recs-header {
+  margin-bottom: 30px;
+}
+
+.recs-main-content {
+  display: flex;
+  gap: 30px;
+}
+
+.recs-filters {
+  width: 250px;
+  position: sticky;
+  top: 20px;
+  align-self: flex-start;
+}
+
+.recs-products-area {
+  flex: 1;
+}
+
+.recs-products-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+  min-height: 600px;
+}
+
+.recs-loading-state {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 40px;
+}
+
+.recs-error-state {
+  grid-column: 1 / -1;
+  color: #ff4d4f;
+  text-align: center;
+  padding: 40px;
+}
+
+.recs-empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px;
+}
+
+.recs-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 40px;
+  padding: 20px 0;
+}
+
+.recs-page-numbers {
+  display: flex;
+  gap: 8px;
+}
+
+.recs-page-btn {
+  padding: 8px 16px;
+  border: none;
+  background: #ff00ff;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.recs-page-btn:hover:not(:disabled) {
+  background: #e000e0;
+  transform: translateY(-2px);
+}
+
+.recs-page-btn:disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.recs-active-page {
+  background: #c000c0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.recs-scroll-top {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #ff00ff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
+}
+
+.recs-scroll-top:hover {
+  background: #e000e0;
+  transform: translateY(-3px);
+}
+
+@media (max-width: 768px) {
+  .recs-main-content {
     flex-direction: column;
-    padding: 20px;
-    max-width: 1200px;
-    margin: auto;
-    margin-top: 50px;
-}
+  }
 
-.recommendation-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-}
-
-.recommendation-container {
-    display: flex;
-    gap: 20px;
-    align-items: flex-start;
-}
-
-.filter-section {
-    width: 25%;
-    min-width: 250px;
-}
-
-.products-section {
-    flex-grow: 1;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: flex-start;
-}
-
-.search-bar {
-    display: flex;
-    justify-content: flex-end;
+  .recs-filters {
     width: 100%;
+    position: static;
+  }
+
+  .recs-products-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
-.search-bar .ant-input-search {
-    width: 700px;
+.recs-nav-btn,
+.recs-page-btn,
+.recs-scroll-top-btn {
+  padding: 8px 16px;
+  border: 2px solid #ff00ff;
+  background: white;
+  color: #ff00ff;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.recs-nav-btn:hover:not(:disabled),
+.recs-page-btn:hover:not(:disabled),
+.recs-scroll-top-btn:hover {
+  background: #f5f5f5;
+}
+
+.recs-nav-btn:disabled,
+.recs-page-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.recs-active-page {
+  background: #ff00ff !important;
+  color: white !important;
+}
+
+.recs-scroll-top-btn {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }

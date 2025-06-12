@@ -9,28 +9,9 @@ import CheckoutPage from "./pages/checkout-page/CheckoutPage";
 import ProfilePage from "./pages/profile-page/ProfilePage";
 import RecommendationPage from "./pages/recommendation-page/RecommendationPage";
 import SignupPage from "./pages/sign-up-page/SignupPage";
+import FavouritesPage from "./pages/favourites-page/FavouritesPage";
 
 const App: React.FC = () => {
-  // const [rating, setRating] = React.useState(4.5);
-
-  // function handleRatingChange(value: number): void {
-  //   setRating(value);
-  //   console.log(`New rating is ${value}`);
-  // }
-
-  // const handleAddToCart = () => {
-  //   console.log("Added to cart!");
-  // };
-
-  // const handleAddToWishlist = () => {
-  //   console.log("Added to wishlist!");
-  // };
-  // const handleSubmit = (values: any) => {
-  //   console.log("Form Submitted:", values);
-  // };
-  // const handleCardClick = () => {
-  //   console.log("Card clicked!");
-  // };
   return (
     <>
       <Router>
@@ -39,11 +20,15 @@ const App: React.FC = () => {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
-          <Route path="/product-details" element={<ProductDetailsPage />} />
+          <Route
+            path="/product-details/:articleId"
+            element={<ProductDetailsPage />}
+          />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/recommendations" element={<RecommendationPage />} />
+          <Route path="/favourites" element={<FavouritesPage />} />
         </Routes>
       </Router>
     </>

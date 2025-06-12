@@ -1,0 +1,4 @@
+myenv/
+venv/
+models/
+.env

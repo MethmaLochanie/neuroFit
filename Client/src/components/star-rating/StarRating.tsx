@@ -3,10 +3,10 @@ import { Rate } from "antd";
 import "./StarRating.css";
 
 interface StarRatingProps {
-  rating: number; // The current rating value
-  allowHalf?: boolean; // Option to allow half-star ratings
-  onChange?: (value: number) => void; // Callback when the rating changes
-  readonly?: boolean; // When true, the stars are view-only
+  rating: number;
+  allowHalf?: boolean;
+  onChange?: (value: number) => void;
+  readonly?: boolean;
 }
 
 const StarRating: React.FC<StarRatingProps> = ({
@@ -20,8 +20,8 @@ const StarRating: React.FC<StarRatingProps> = ({
       <Rate
         allowHalf={allowHalf}
         value={rating}
-        onChange={readonly ? undefined : onChange} // Disable interaction if readonly
-        disabled={readonly} // Disables interaction visually
+        onChange={readonly ? undefined : onChange}
+        disabled={readonly}
         className="custom-stars"
       />
     </div>

@@ -1,69 +1,98 @@
-import React from "react";
-import "./CheckoutPage.css";
-import OrderSummary from "../../containers/order-summary/OrderSummary";
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import CustomTitle from "../../components/custom-title/CustomTitle";
 import ReusableForm from "../../components/reusable-form/ReusableForm";
-import PaymentMethod from "../../containers/payment-method/PaymentMethod";
+import useAuth from "../../hooks/useAuth";
+import { useUserByCustomerMappedId } from "../../hooks/useUserByCustomerMappedId";
+import showNotification from "../../components/custom-notification/CustomNotification";
+import useCart from "../../hooks/useCart";
+import OrderSummaryModal from "../../components/order-summary-modal/OrderSummaryModal";
+import "./CheckoutPage.css";
 
 const CheckoutPage: React.FC = () => {
-  const orderItems = [
-    {
-      image: "Blue_Cute_Dog.png",
-      name: "Blue Flower Print Crop Top",
-      quantity: 1,
-      price: 29.0,
-      color: "Yellow",
-    },
-    {
-      image: "Blue_Cute_Dog.png",
-      name: "Lavender Hoodie",
-      quantity: 2,
-      price: 59.5,
-      color: "Lavender",
-    },
-    {
-      image: "Blue_Cute_Dog.png",
-      name: "Black Sweatshirt",
-      quantity: 2,
-      price: 61.5,
-      color: "Black",
-    },
-  ];
+  const { user: authUser } = useAuth();
+  const customer_mapped_id = authUser?.customer_mapped_id;
+  const { user: fetchedUser, loading: userLoading } =
+    useUserByCustomerMappedId(customer_mapped_id);
+  const { getCartItemsByUserId } = useCart();
+  const location = useLocation();
+  const [checkoutItems, setCheckoutItems] = useState<any[]>([]);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    const loadCheckoutItems = async () => {
+      setIsLoading(true);
+      try {
+        if (location.state?.checkoutItems) {
+          setCheckoutItems(location.state.checkoutItems);
+        } else if (customer_mapped_id) {
+          const cartItems = await getCartItemsByUserId(customer_mapped_id);
+          setCheckoutItems(cartItems || []);
+        }
+      } catch (error) {
+        showNotification({
+          message: "Error",
+          description: "Failed to load checkout items",
+          type: "error",
+        });
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadCheckoutItems();
+  }, [customer_mapped_id, location.state]);
+
+  const initialFormValues = {
+    fName: fetchedUser?.fName || "",
+    lName: fetchedUser?.lName || "",
+    email: fetchedUser?.email || "",
+    country: fetchedUser?.country || "",
+    city: fetchedUser?.city || "",
+    postalCode: fetchedUser?.postalCode || "",
+    phoneNumber: fetchedUser?.phoneNumber || "",
+  };
+
+  const calculateTotal = () => {
+    const subtotal = checkoutItems.reduce(
+      (total, item) => total + (item.subtotal || 0),
+      0
+    );
+    const shippingCost = 20;
+    return subtotal + shippingCost;
+  };
+
+  const handleFormSubmit = async (values: any) => {
+    setIsModalVisible(true);
+  };
 
   return (
     <div className="checkout-container">
       <div className="checkout-title">
-        <CustomTitle text="Check Out" />{" "}
+        <CustomTitle text="Check Out" />
       </div>
-
-      {/* Order Summary */}
-      <div className="order-summary-container">
-        <OrderSummary
-          items={orderItems}
-          subtotal={513}
-          savings={30}
-          shipping={-5}
-          total={478}
-        />
-      </div>
-
-      {/* Row Layout for Form and Payment */}
       <div className="checkout-row">
-        {/* Form Section */}
         <div className="form-container">
           <ReusableForm
             isAgeVisible={false}
-            onSubmit={(values) => console.log("Checkout Details:", values)}
-            buttonName={"Check Out"}
+            onSubmit={handleFormSubmit}
+            buttonName="Place Order"
             isSignupPage={false}
+            initialValues={initialFormValues}
+            isLoading={userLoading || isLoading}
+            disableButtonOnUnchanged={false}
           />
         </div>
-
-        {/* Payment Method Section */}
-        <div className="payment-method-container">
-          <PaymentMethod />
-        </div>
       </div>
+
+      <OrderSummaryModal
+        visible={isModalVisible}
+        onClose={() => setIsModalVisible(false)}
+        items={checkoutItems}
+        total={calculateTotal()}
+        paymentMethod="Credit Card"
+        formData={initialFormValues}
+      />
     </div>
   );
 };

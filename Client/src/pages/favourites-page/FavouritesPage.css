@@ -1,0 +1,21 @@
+.favourites-page {
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.favourites-loading {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.favourites-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-top: 24px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+}
